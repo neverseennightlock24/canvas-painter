@@ -4,6 +4,16 @@
 <head>
     <title>Random Walker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        canvas {
+            display: block; /* Remove extra space below the canvas */
+        }
+    </style>
 </head>
 
 <body>
@@ -11,8 +21,21 @@
         let xPos, yPos; // Position of the square
         let stepX, stepY; // Direction of movement
         let hitBorder = false; // Flag to track if the square hit the border
-        let squareColor = [0, 0, 0]; // Initial color of the square
         let squareSize = 10; // Size of the square
+
+        // Define specific colors
+        const colors = [
+            [255, 255, 255], // White
+            [0, 127, 255], // Azure Blue
+            [255, 0, 0], // Red
+            [0, 255, 0], // Green
+            [255, 215, 0], // Gold
+            [192, 192, 192], // Silver
+            [255, 165, 0], // Orange
+            [128, 0, 128] // Purple
+        ];
+
+        let squareColor = colors[0]; // Initial color of the square
 
         function setup() {
             createCanvas(windowWidth, windowHeight);
@@ -21,7 +44,7 @@
             stepX = 1;
             stepY = 0;
             noStroke(); // Remove the stroke border of the square
-            background(255);
+            background(0); // Set the background to black
         }
 
         function draw() {
@@ -44,7 +67,7 @@
                 hitBorder = true; // Set the flag to true when hitting the border
 
                 // Change the color and direction when hitting the border
-                squareColor = [random(255), random(255), random(255)];
+                squareColor = random(colors); // Choose a random color from the array
                 stepX = floor(random(-1, 2));
                 stepY = floor(random(-1, 2));
             } else {
@@ -60,6 +83,7 @@
             resizeCanvas(windowWidth, windowHeight);
             xPos = windowWidth / 2;
             yPos = windowHeight / 2;
+            background(0); // Reset the background to black
         }
     </script>
 </body>
